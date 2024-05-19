@@ -5,8 +5,9 @@ on how to utilize this more properly -->
 
 <template>
   <div>
-    <p>Default layout</p>
+    <Header />
     <slot />
+    <Footer />
   </div>
 </template>
 

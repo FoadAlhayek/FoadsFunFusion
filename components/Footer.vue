@@ -2,7 +2,7 @@
 
 <template>
   <header>
-    <NuxtLink to="/">Header: FOAD.FUN</NuxtLink>
+    <NuxtLink to="/">Footer: FOAD.FUN</NuxtLink>
   </header>
 </template>
 
