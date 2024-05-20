@@ -10,16 +10,18 @@
 
 
 # 9an Tasks
-- [ ] #9an #in-progress Make a 3x3 grid
-	- [ ] Make the middle square black
-	- [ ] Add letters in the squares
-- [ ] #9an #todo Make a text input
+- [x] #9an #in-progress Make a 3x3 grid ✅ 2024-05-19
+- [x] #9an #in-progress Make the middle square black ✅ 2024-05-19
+- [x] #9an #in-progress Add letters in the squares ✅ 2024-05-19
+- [x] #9an Shuffle the word's letters ✅ 2024-05-19
+- [ ] #9an #in-progress Look up a correct unbiased way to shuffle the letters
+- [ ] #9an #in-progress Make a text input
 - [ ] #9an #todo Have a list of 9 long words and generate new words
-- [ ] #9an #todo Implement a check if the word is correct
+- [ ] #9an #in-progress  Implement a check if the word is correct
 	- [ ] Display with //Lätt on the right corner
 - [ ] #9an #todo Generate a new word every new real-life day
 - [ ] #9an #todo Connect it to a lexicon
-- [ ] #9an #todo Make an English version of it
+- [ ] #9an #todo Make a Swedish & English version of the game
 - [ ] #9an #todo Learn how to implement the logic in backend
 
 
