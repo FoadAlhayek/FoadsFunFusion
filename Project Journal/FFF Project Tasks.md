@@ -14,10 +14,17 @@
 - [x] #9an #in-progress Make the middle square black ✅ 2024-05-19
 - [x] #9an #in-progress Add letters in the squares ✅ 2024-05-19
 - [x] #9an Shuffle the word's letters ✅ 2024-05-19
-- [ ] #9an #in-progress Look up a correct unbiased way to shuffle the letters
-- [ ] #9an #in-progress Make a text input
+- [x] #9an #in-progress Look up a correct unbiased way to shuffle the letters ✅ 2024-05-20
+	- [x] Solution: Fisher-Yates shuffle ✅ 2024-05-20
+- [x] #9an #in-progress Make a text input ✅ 2024-05-21
+	- [x] Only allowed the word's letters ✅ 2024-05-21
+	- [x] Working logic, deletion --> use letter again ✅ 2024-05-21
+	- [x] Handle duplicates of a letter to be allowed ✅ 2024-05-21
+- [ ] #9an #in-progress Make the text input 9 boxes
+	- [ ] Make it respond to keypress without mouse click
+	- [ ] Style it
 - [ ] #9an #todo Have a list of 9 long words and generate new words
-- [ ] #9an #in-progress  Implement a check if the word is correct
+- [ ] #9an #todo  Implement a check if the word is correct
 	- [ ] Display with //Lätt on the right corner
 - [ ] #9an #todo Generate a new word every new real-life day
 - [ ] #9an #todo Connect it to a lexicon
