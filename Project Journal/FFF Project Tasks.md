@@ -21,8 +21,9 @@
 	- [x] Working logic, deletion --> use letter again ✅ 2024-05-21
 	- [x] Handle duplicates of a letter to be allowed ✅ 2024-05-21
 - [ ] #9an #in-progress Make the text input 9 boxes
-	- [ ] Make it respond to keypress without mouse click
-	- [ ] Style it
+	- [x] Make it respond to keypress without mouse click ✅ 2024-06-01
+	- [ ] Style it (keep it simple and increase later)
+- [ ] #9an #in-progress Center the text input with the 9an blocks
 - [ ] #9an #todo Have a list of 9 long words and generate new words
 - [ ] #9an #todo  Implement a check if the word is correct
 	- [ ] Display with //Lätt on the right corner

@@ -45,43 +45,53 @@ function shuffle(array: any[], seed: number = 0) {
 const seed = 123;
 const word = "microsoft".toUpperCase();
 const letters = shuffle(Array.from(word), seed);
-let usedLetters: { [key: String]: Number } = {};
-let userInput = ref('');
+let userInput = ref([]);
 
-// Init dict usedLetters - used later to prevent inputs
+// Init dict letterFreq - used later to prevent inputs
+let letterFreq: { [key: String]: Number } = {};
+
 for (const letter of letters) {
-  if (!usedLetters[letter]) {
-    usedLetters[letter] = 1;
+  if (!letterFreq[letter]) {
+    letterFreq[letter] = 1;
   } else {
-    usedLetters[letter]++;
+    letterFreq[letter]++;
   }
 }
 
-// TEST BELOW
+// Event logic that handles keyboard presses
+onMounted(() => {
+  window.addEventListener('keydown', (event) => {
+    const keyInput = event.key.toUpperCase();
 
-const handleKeydown = (event) => {
-  // Re-add +1 on deleted letters
-  if (event.key === 'Backspace') {
-    // THIS IS NOT WORKING PROPERLY - error when event is empty!
-    const lastInput = userInput.at(-1).toUpperCase();
-    console.log(event)
-    console.log(lastInput)
-    if (usedLetters[lastInput] !== undefined) {
-      usedLetters[lastInput]++;
+    // Handle backspace by increasing the freq. limit for the letters
+    if (keyInput === 'BACKSPACE') {
+      // Removes the latest letter if the list is not empty
+      const removedLetter = userInput.value.pop();
+      if (removedLetter) {
+        letterFreq[removedLetter.char]++;
+      }
+      // Handles keys within the target word
+    } else if (keyInput.length === 1 && letterFreq.hasOwnProperty(keyInput)) {
+      // Highlight repeated letters if they already exists and hit their limit
+      if (letterFreq[keyInput] === 0) {
+        userInput.value.forEach(x => {
+          if (x.char === keyInput && !x.highlighted) {
+            x.highlighted = true;
+            setTimeout(() => { x.highlighted = false; }, 1000);
+          }
+        });
+      }
+      // Prevents inputting a letter if it hits its limit (should be if and above else if)
+      if (letterFreq[keyInput] > 0) {
+        userInput.value.push({ char: keyInput, highlighted: false });
+        letterFreq[keyInput]--;
+      }
+      // Somewhat unnecessary, prevents for example arrow keys to scroll the page
+    } else {
+      event.preventDefault();
     }
-    return;
-  }
-
-  // Only allow original word's char
-  const char = event.key.toUpperCase();
-
-  if (usedLetters[char] && usedLetters[char] > 0) {
-    usedLetters[char]--;
-    userInput += char;
-  } else {
-    event.preventDefault();
-  }
-};
+  });
+});
 
 </script>
 
@@ -93,10 +103,10 @@ const handleKeydown = (event) => {
       {{ letter }}
     </div>
   </div>
-  <div>
-    <input v-model="userInput" @keydown="handleKeydown" maxlength="9" placeholder="Type here...">
+  <div v-for="(uiLetter, index) in userInput" :key="index" class="inline-block p-2 m-1 border border-black"
+    :class="{ 'bg-orange-500': uiLetter.highlighted }">
+    {{ uiLetter.char }}
   </div>
-  <p>{{ usedLetters }}</p>
 </template>
 
 <style lang="scss"></style>
