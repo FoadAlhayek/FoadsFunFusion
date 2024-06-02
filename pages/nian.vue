@@ -48,7 +48,7 @@ const puzzleLetters = shuffle(Array.from(word), seed);
 let userInput = ref([]);
 
 // Init dict letterFreq - used later to prevent inputs
-let letterFreq: { [key: String]: Number } = {};
+let letterFreq: { [key: string]: number } = {};
 
 for (const letter of puzzleLetters) {
   if (!letterFreq[letter]) {
