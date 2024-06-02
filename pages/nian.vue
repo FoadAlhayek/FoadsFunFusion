@@ -131,7 +131,7 @@ onUnmounted(() => {
     <div class="inline-flex flex-wrap mt-3">
       <div v-for="(inputLetter, inputIdx) in userInput" :key="inputIdx"
         class="p-2 size-10 border-dashed border border-black rounded-lg flex justify-center items-center"
-        :class="{ 'bg-orange-500': inputLetter.highlighted, 'ml-1': inputIdx > 0 }">
+        :class="{ 'bg-orange-300': inputLetter.highlighted, 'ml-1': inputIdx > 0 }">
         {{ inputLetter.char }}
       </div>
     </div>

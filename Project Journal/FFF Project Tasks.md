@@ -20,10 +20,16 @@
 	- [x] Only allowed the word's letters ✅ 2024-05-21
 	- [x] Working logic, deletion --> use letter again ✅ 2024-05-21
 	- [x] Handle duplicates of a letter to be allowed ✅ 2024-05-21
-- [ ] #9an #in-progress Make the text input 9 boxes
+- [x] #9an #in-progress Make the text input 9 boxes ✅ 2024-06-02
 	- [x] Make it respond to keypress without mouse click ✅ 2024-06-01
-	- [ ] Style it (keep it simple and increase later)
-- [ ] #9an #in-progress Center the text input with the 9an blocks
+	- [x] Style it (keep it simple and increase later) ✅ 2024-06-02
+- [x] #9an #in-progress Center the text input with the 9an blocks ✅ 2024-06-02
+- [ ] #9an #in-progress Make the 9an tiles clickable
+	- [ ] Clicked tiles are slightly grayed out, non clicked are white, the black is opposite(?)
+- [ ] #9an #in-progress Synch/Connect tiles with the keyboard
+	- [ ] Clicking tile should show same as keyboard input
+	- [ ] Seamless mix between keyboard and mouse usage
+	- [ ] Synch keyboard with graying out tiles
 - [ ] #9an #todo Have a list of 9 long words and generate new words
 - [ ] #9an #todo  Implement a check if the word is correct
 	- [ ] Display with //Lätt on the right corner
