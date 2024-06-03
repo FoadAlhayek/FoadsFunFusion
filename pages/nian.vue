@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted, type Ref } from 'vue';
 /**
  * A PRNG class that represents the Linear Congruential Generator (`LCG`).
  * The LCG generates sequences of random numbers with the help of a seed and the next() method
@@ -45,7 +46,8 @@ function shuffle(array: string[], seed: number = 0) {
 const seed = 123;
 const word = "microsoft".toUpperCase();
 const puzzleLetters = shuffle(Array.from(word), seed);
-let userInput = ref([]);
+const btnStates: Ref<boolean[]> = ref(puzzleLetters.map(() => false))
+const userInput: Ref<{ char: string; highlighted: boolean }[]> = ref([]);
 
 // Init dict letterFreq - used later to prevent inputs
 let letterFreq: { [key: string]: number } = {};
@@ -59,11 +61,20 @@ for (const letter of puzzleLetters) {
 }
 
 // Helper functions for the event handler handleKeydown -the logic is for keyboard event presses and displays through userInput variable
-function handleBackspace() {
-  // Removes the latest letter if the list is not empty
-  const removedLetter = userInput.value.pop();
+function handleLetterDeletion(letterToDel: string = "") {
+  let removedLetter: string = "";
+
+  // Mouse click logic - len 1 for safety
+  if (letterToDel.length === 1) {
+    const delIdx = userInput.value.findIndex(item => item.char === letterToDel);
+    removedLetter = userInput.value.splice(delIdx, 1)[0].char;
+  } // Backspace logic - Removes the latest letter if the list is not empty 
+  else if (userInput.value.length > 0) {
+    removedLetter = userInput.value.pop()?.char || "";
+  }
+
   if (removedLetter) {
-    letterFreq[removedLetter.char]++;
+    letterFreq[removedLetter]++;
   }
 }
 
@@ -88,12 +99,12 @@ function highlightRepeatedLetters(keyInput: string) {
 }
 
 // The main event handler for keyboard presses
-let handleKeydown = (event) => {
+let handleKeydown = (event: KeyboardEvent) => {
   const keyInput = event.key.toUpperCase();
 
   // Handle backspace by increasing the freq. limit for the letters
   if (keyInput === 'BACKSPACE') {
-    handleBackspace();
+    handleLetterDeletion();
   } // Handles keys within the target word
   else if (keyInput.length === 1 && letterFreq.hasOwnProperty(keyInput)) {
     handleLetterInput(keyInput);
@@ -112,6 +123,25 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('keydown', handleKeydown);
 });
+
+
+// Code that handles mouse inputs
+function toggleBtnState(idx: number) {
+  btnStates.value[idx] = !btnStates.value[idx]
+}
+
+// Code that displays used words based on the buttons clicked and is synchronized with keyboard inputs
+// TODO: Fix so deleting with the keyboard also sets switches back the btnState!!!
+function displayUsedWords(letter: string, idx: number) {
+  toggleBtnState(idx)
+
+  if (btnStates.value[idx]) {
+    handleLetterInput(letter)
+  } else {
+    handleLetterDeletion(letter)
+  }
+}
+
 </script>
 
 <template>
@@ -120,11 +150,12 @@ onUnmounted(() => {
 
     <!-- Displays the 9 word puzzle -->
     <div class="size-80 text-4xl bg-white text-black grid grid-cols-3 gap-0 border-2 border-black rounded-md">
-      <div v-for="(displayLetter, letterBoxIdx) in puzzleLetters"
+      <button @click="displayUsedWords(displayLetter, letterBoxIdx)"
+        v-for="(displayLetter, letterBoxIdx) in puzzleLetters" :key="letterBoxIdx"
         class="border border-black flex justify-center items-center"
-        :class="{ 'bg-black text-white': letterBoxIdx === 4 }">
+        :class="{ 'bg-black text-white': letterBoxIdx === 4, 'bg-gray-300': btnStates[letterBoxIdx], 'bg-gray-600': letterBoxIdx === 4 && btnStates[letterBoxIdx] }">
         {{ displayLetter }}
-      </div>
+      </button>
     </div>
 
     <!-- The user input, is displayed iteratively until 9 boxes  -->

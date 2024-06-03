@@ -24,11 +24,12 @@
 	- [x] Make it respond to keypress without mouse click ✅ 2024-06-01
 	- [x] Style it (keep it simple and increase later) ✅ 2024-06-02
 - [x] #9an #in-progress Center the text input with the 9an blocks ✅ 2024-06-02
-- [ ] #9an #in-progress Make the 9an tiles clickable
-	- [ ] Clicked tiles are slightly grayed out, non clicked are white, the black is opposite(?)
+- [x] #9an #in-progress Make the 9an tiles clickable ✅ 2024-06-03
+	- [ ] Clicked tiles are slightly grayed out, non clicked are white, the black is darker gray
 - [ ] #9an #in-progress Synch/Connect tiles with the keyboard
-	- [ ] Clicking tile should show same as keyboard input
+	- [x] Clicking tile should show same as keyboard input ✅ 2024-06-03
 	- [ ] Seamless mix between keyboard and mouse usage
+	- [ ] Resolve bug with btnState (backspace does not toggle it)
 	- [ ] Synch keyboard with graying out tiles
 - [ ] #9an #todo Have a list of 9 long words and generate new words
 - [ ] #9an #todo  Implement a check if the word is correct

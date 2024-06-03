@@ -5,7 +5,7 @@
     <GameBtn to="nian" />
     <GameBtn to="currency-converter" src="svg/earth-reviews.svg" />
     <GameBtn to="playground" src="svg/life-stats.svg" />
-    <GameBtn src="svg/printing-money.svg" />
+    <GameBtn to="testarea" src="svg/printing-money.svg" />
     <GameBtn src="svg/earth-reviews.svg" />
     <GameBtn />
     <GameBtn />
