@@ -147,16 +147,17 @@ onUnmounted(() => {
 
 
 // Controls if the tiles are grayed out or not
-function changeBtnState(letter: string, state: boolean, usedIdx: number = -1) {
+function changeBtnState(letter: string, state: boolean, usedIdx: number | undefined = -1) {
   if (usedIdx === -1) {
     usedIdx = indexOfAll(puzzleLetters, letter).find(idx => btnStates.value[idx] === !state);
   }
 
-  btnStates.value[usedIdx] = state;
+  if (usedIdx !== undefined) {
+    btnStates.value[usedIdx] = state;
+  }
 }
 
 // Code that displays used words based on the buttons clicked and is synchronized with keyboard inputs
-// TODO: Fix so deleting with the keyboard also sets switches back the btnState!!!
 function displayUsedWords(letter: string, idx: number) {
   if (btnStates.value[idx]) {
     handleLetterDeletion(letter, idx)

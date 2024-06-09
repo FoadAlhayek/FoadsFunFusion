@@ -25,19 +25,20 @@
 	- [x] Style it (keep it simple and increase later) ✅ 2024-06-02
 - [x] #9an #in-progress Center the text input with the 9an blocks ✅ 2024-06-02
 - [x] #9an #in-progress Make the 9an tiles clickable ✅ 2024-06-03
-	- [ ] Clicked tiles are slightly grayed out, non clicked are white, the black is darker gray
-- [ ] #9an #in-progress Synch/Connect tiles with the keyboard
+	- [x] Clicked tiles are slightly grayed out, non clicked are white, the black is darker gray ✅ 2024-06-09
+- [x] #9an #in-progress Synch/Connect tiles with the keyboard ✅ 2024-06-09
 	- [x] Clicking tile should show same as keyboard input ✅ 2024-06-03
-	- [ ] Seamless mix between keyboard and mouse usage
-	- [ ] Resolve bug with btnState (backspace does not toggle it)
-	- [ ] Synch keyboard with graying out tiles
+	- [x] Seamless mix between keyboard and mouse usage ✅ 2024-06-09
+	- [x] Resolve bug with btnState (backspace does not toggle it) ✅ 2024-06-09
+	- [x] Synch keyboard with graying out tiles ✅ 2024-06-09
 - [ ] #9an #todo Have a list of 9 long words and generate new words
-- [ ] #9an #todo  Implement a check if the word is correct
+- [ ] #9an #in-progress  Implement a check if the word is correct
 	- [ ] Display with //Lätt on the right corner
 - [ ] #9an #todo Generate a new word every new real-life day
 - [ ] #9an #todo Connect it to a lexicon
 - [ ] #9an #todo Make a Swedish & English version of the game
 - [ ] #9an #todo Learn how to implement the logic in backend
+- [ ] #9an #todo Convert JSDoc to TSDoc
 
 
 # Ideas
