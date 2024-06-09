@@ -80,7 +80,7 @@ for (const letter of puzzleLetters) {
 }
 
 // Helper functions for the event handler handleKeydown -the logic is for keyboard event presses and displays through userInput variable
-function handleLetterDeletion(letterToDel: string = "") {
+function handleLetterDeletion(letterToDel: string = "", tileIdx: number = -1) {
   let removedLetter: string = "";
 
   // Mouse click logic - len 1 for safety
@@ -93,15 +93,15 @@ function handleLetterDeletion(letterToDel: string = "") {
   }
 
   if (removedLetter) {
-    changeBtnState(removedLetter, false)
+    changeBtnState(removedLetter, false, tileIdx)
     letterFreq[removedLetter]++;
   }
 }
 
-function handleLetterInput(keyInput: string) {
+function handleLetterInput(keyInput: string, tileIdx: number = -1) {
   // Prevents inputting a letter if it hits its limit
   if (letterFreq[keyInput] > 0) {
-    changeBtnState(keyInput, true)
+    changeBtnState(keyInput, true, tileIdx)
     userInput.value.push({ char: keyInput, highlighted: false });
     letterFreq[keyInput]--;
   } // Highlight repeated letters if they already exists and hit their limit
@@ -147,21 +147,21 @@ onUnmounted(() => {
 
 
 // Controls if the tiles are grayed out or not
-function changeBtnState(letter: string, state: boolean) {
-  const usedIdx: number | undefined = indexOfAll(puzzleLetters, letter).find(idx => btnStates.value[idx] === !state);
-
-  if (usedIdx !== undefined) {
-    btnStates.value[usedIdx] = state;
+function changeBtnState(letter: string, state: boolean, usedIdx: number = -1) {
+  if (usedIdx === -1) {
+    usedIdx = indexOfAll(puzzleLetters, letter).find(idx => btnStates.value[idx] === !state);
   }
+
+  btnStates.value[usedIdx] = state;
 }
 
 // Code that displays used words based on the buttons clicked and is synchronized with keyboard inputs
 // TODO: Fix so deleting with the keyboard also sets switches back the btnState!!!
 function displayUsedWords(letter: string, idx: number) {
   if (btnStates.value[idx]) {
-    handleLetterDeletion(letter)
+    handleLetterDeletion(letter, idx)
   } else {
-    handleLetterInput(letter)
+    handleLetterInput(letter, idx)
   }
 }
 
