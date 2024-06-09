@@ -42,6 +42,25 @@ function shuffle(array: string[], seed: number = 0) {
   return array;
 }
 
+
+/**
+ * Finds all indices of a value in an array.
+ *
+ * @param {array} array - The array to search.
+ * @param {any} val - The value to find.
+ * @returns {array} An array of indices at which the value is found.
+ */
+function indexOfAll(array: any[], val: any): number[] {
+  let indices: number[] = [];
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] === val) {
+      indices.push(i);
+    }
+  }
+  return indices;
+}
+
+
 // The get word, seed and scramble part need to be handled on the server-side!
 const seed = 123;
 const word = "microsoft".toUpperCase();
@@ -74,6 +93,7 @@ function handleLetterDeletion(letterToDel: string = "") {
   }
 
   if (removedLetter) {
+    changeBtnState(removedLetter, false)
     letterFreq[removedLetter]++;
   }
 }
@@ -81,6 +101,7 @@ function handleLetterDeletion(letterToDel: string = "") {
 function handleLetterInput(keyInput: string) {
   // Prevents inputting a letter if it hits its limit
   if (letterFreq[keyInput] > 0) {
+    changeBtnState(keyInput, true)
     userInput.value.push({ char: keyInput, highlighted: false });
     letterFreq[keyInput]--;
   } // Highlight repeated letters if they already exists and hit their limit
@@ -125,20 +146,22 @@ onUnmounted(() => {
 });
 
 
-// Code that handles mouse inputs
-function toggleBtnState(idx: number) {
-  btnStates.value[idx] = !btnStates.value[idx]
+// Controls if the tiles are grayed out or not
+function changeBtnState(letter: string, state: boolean) {
+  const usedIdx: number | undefined = indexOfAll(puzzleLetters, letter).find(idx => btnStates.value[idx] === !state);
+
+  if (usedIdx !== undefined) {
+    btnStates.value[usedIdx] = state;
+  }
 }
 
 // Code that displays used words based on the buttons clicked and is synchronized with keyboard inputs
 // TODO: Fix so deleting with the keyboard also sets switches back the btnState!!!
 function displayUsedWords(letter: string, idx: number) {
-  toggleBtnState(idx)
-
   if (btnStates.value[idx]) {
-    handleLetterInput(letter)
-  } else {
     handleLetterDeletion(letter)
+  } else {
+    handleLetterInput(letter)
   }
 }
 
