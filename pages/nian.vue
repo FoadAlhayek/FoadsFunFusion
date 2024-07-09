@@ -67,6 +67,7 @@ const word = "microsoft".toUpperCase();
 const puzzleLetters = shuffle(Array.from(word), seed);
 const btnStates: Ref<boolean[]> = ref(puzzleLetters.map(() => false))
 const userInput: Ref<{ char: string; highlighted: boolean }[]> = ref([]);
+let isGuessCorrect: Ref<boolean> = ref(false)
 
 // Init dict letterFreq - used later to prevent inputs
 let letterFreq: { [key: string]: number } = {};
@@ -82,6 +83,7 @@ for (const letter of puzzleLetters) {
 // Helper functions for the event handler handleKeydown -the logic is for keyboard event presses and displays through userInput variable
 function handleLetterDeletion(letterToDel: string = "", tileIdx: number = -1) {
   let removedLetter: string = "";
+  isGuessCorrect = false;
 
   // Mouse click logic - len 1 for safety
   if (letterToDel.length === 1) {
@@ -107,6 +109,13 @@ function handleLetterInput(keyInput: string, tileIdx: number = -1) {
   } // Highlight repeated letters if they already exists and hit their limit
   else if (letterFreq[keyInput] === 0) {
     highlightRepeatedLetters(keyInput);
+  }
+
+  if (userInput.value.length === word.length) {
+    let guess = userInput.value.map(item => item.char).join('');
+    isGuessCorrect = guess === word;
+  } else {
+    isGuessCorrect = false;
   }
 }
 
@@ -171,26 +180,32 @@ function displayUsedWords(letter: string, idx: number) {
 <template>
   <!-- Wraps puzzle and input to be able to center them -->
   <div class="max-w-4xl mt-3 mx-auto px-6 font-bold font-mono flex flex-col items-center">
+    <div class="relative inline-block">
+      <!-- Displays the 9 word puzzle -->
+      <div class="size-80 text-4xl bg-white text-black grid grid-cols-3 gap-0 border-2 border-black rounded-md">
+        <button @click="displayUsedWords(displayLetter, letterBoxIdx)"
+          v-for="(displayLetter, letterBoxIdx) in puzzleLetters" :key="letterBoxIdx"
+          class="border border-black flex justify-center items-center"
+          :class="{ 'bg-black text-white': letterBoxIdx === 4, 'bg-gray-300': btnStates[letterBoxIdx], 'bg-gray-600': letterBoxIdx === 4 && btnStates[letterBoxIdx] }">
+          {{ displayLetter }}
+        </button>
+      </div>
 
-    <!-- Displays the 9 word puzzle -->
-    <div class="size-80 text-4xl bg-white text-black grid grid-cols-3 gap-0 border-2 border-black rounded-md">
-      <button @click="displayUsedWords(displayLetter, letterBoxIdx)"
-        v-for="(displayLetter, letterBoxIdx) in puzzleLetters" :key="letterBoxIdx"
-        class="border border-black flex justify-center items-center"
-        :class="{ 'bg-black text-white': letterBoxIdx === 4, 'bg-gray-300': btnStates[letterBoxIdx], 'bg-gray-600': letterBoxIdx === 4 && btnStates[letterBoxIdx] }">
-        {{ displayLetter }}
-      </button>
+      <!-- Display winning text -->
+      <div v-if="isGuessCorrect"
+        class="font-FairProsper text-4xl text-orange-400 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] absolute bottom-0 -right-0 transform translate-x-3/4 translate-y-2/3 rotate-12">
+        //Lätt
+      </div>
     </div>
 
     <!-- The user input, is displayed iteratively until 9 boxes  -->
     <div class="inline-flex flex-wrap mt-3">
       <div v-for="(inputLetter, inputIdx) in userInput" :key="inputIdx"
         class="p-2 size-10 border-dashed border border-black rounded-lg flex justify-center items-center"
-        :class="{ 'bg-orange-300': inputLetter.highlighted, 'ml-1': inputIdx > 0 }">
+        :class="{ 'bg-orange-300': inputLetter.highlighted, 'ml-1': inputIdx > 0, 'border-emerald-300': isGuessCorrect }">
         {{ inputLetter.char }}
       </div>
     </div>
-
   </div>
 </template>
 
