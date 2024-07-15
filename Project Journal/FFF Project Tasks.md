@@ -53,8 +53,8 @@
 	- [ ] Reset
 	- [ ] Solution - after x10 guesses
 		- [ ] Rewrite from //Easy to //Hard if used
-- [ ] #9an #todo Add a Title "Nian" and subtitle that briefly explaining the game
-	- [ ] Decorate it mono-type and simple, should have the feel of The NY Times
+- [x] #9an #in-progress  Add a Title "Nian" and subtitle that briefly explaining the game ✅ 2024-07-15
+	- [x] Decorate it mono-type and simple, should have the feel of The NY Times ✅ 2024-07-15
 - [ ] #9an #todo Let friends try it out for a week
 - [ ] #9an #todo Implement dark mode
 - [ ] #9an #todo Change style and background so it feels it is in a news paper

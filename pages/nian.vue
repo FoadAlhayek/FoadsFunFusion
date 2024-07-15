@@ -242,11 +242,17 @@ function displayUsedWords(letter: string, idx: number) {
 </script>
 
 <template>
+  <!-- Title and subtitle -->
+  <div class="mt-3 font-mono flex flex-col items-center">
+    <h1 class="text-5xl tracking-widest">NIAN</h1>
+    <h2 class="text-base leading-none">Find the nine letter word</h2>
+  </div>
+
   <!-- Wraps puzzle and input to be able to center them -->
-  <div class="max-w-4xl mt-3 mx-auto px-6 font-bold font-mono flex flex-col items-center">
+  <div class="mt-5 px-6 font-bold font-mono flex flex-col items-center">
     <div class="relative inline-block">
       <!-- Displays the 9 word puzzle -->
-      <div class="size-80 text-4xl bg-white text-black grid grid-cols-3 gap-0 border-2 border-black rounded-md">
+      <div class="size-60 text-4xl bg-white text-black grid grid-cols-3 gap-0 border-2 border-black rounded-md">
         <button @click="displayUsedWords(displayLetter, letterBoxIdx)"
           v-for="(displayLetter, letterBoxIdx) in puzzleLetters" :key="letterBoxIdx"
           class="border border-black flex justify-center items-center"
