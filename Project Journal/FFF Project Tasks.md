@@ -31,14 +31,33 @@
 	- [x] Seamless mix between keyboard and mouse usage ✅ 2024-06-09
 	- [x] Resolve bug with btnState (backspace does not toggle it) ✅ 2024-06-09
 	- [x] Synch keyboard with graying out tiles ✅ 2024-06-09
-- [ ] #9an #todo Have a list of 9 long words and generate new words
-- [ ] #9an #in-progress  Implement a check if the word is correct
-	- [ ] Display with //Lätt on the right corner
-- [ ] #9an #todo Generate a new word every new real-life day
-- [ ] #9an #todo Connect it to a lexicon
-- [ ] #9an #todo Make a Swedish & English version of the game
-- [ ] #9an #todo Learn how to implement the logic in backend
-- [ ] #9an #todo Convert JSDoc to TSDoc
+- [x] #9an #in-progress  Have a list of 9 long words and generate new words ✅ 2024-07-13
+- [x] #9an #in-progress  Implement a check if the word is correct ✅ 2024-07-09
+	- [x] Display with //Lätt on the right corner ✅ 2024-07-09
+- [x] #9an #in-progress  Generate a new word every new real-life local day ✅ 2024-07-13
+- [x] #9an #in-progress  Connect it to a ~~lexicon~~ JSON file ✅ 2024-07-13
+- [x] #9an #in-progress Make a Swedish version of the game ✅ 2024-07-13
+- [ ] #9an #todo Make an English version of the game
+- [ ] #9an #todo Learn to implement the logic in backend (not relevant atm)
+- [x] #9an #in-progress  Convert JSDoc to TSDoc ✅ 2024-07-13
+- [x] #9an #in-progress Create a menu button ✅ 2024-07-13
+- [ ] #9an #todo Animate when answer is wrong (shaking)
+- [ ] #9an #todo Animate when answer is correct (individual jump)
+- [x] #9an #in-progress Show if there are more than one answer (x2, x3, etc.) ✅ 2024-07-13
+- [ ] #9an #todo Save the correct answer under the input
+- [ ] #9an #todo If all words found, make it pop (fireworks)
+- [ ] #9an #todo Implement sounds for wrong and correct
+	- [ ] Maybe also add sounds for repeating letters and input sound
+- [ ] #9an #todo Add buttons to the side of Nian
+	- [ ] Mute
+	- [ ] Reset
+	- [ ] Solution - after x10 guesses
+		- [ ] Rewrite from //Easy to //Hard if used
+- [ ] #9an #todo Add a Title "Nian" and subtitle that briefly explaining the game
+	- [ ] Decorate it mono-type and simple, should have the feel of The NY Times
+- [ ] #9an #todo Let friends try it out for a week
+- [ ] #9an #todo Implement dark mode
+- [ ] #9an #todo Change style and background so it feels it is in a news paper
 
 
 # Ideas
@@ -46,8 +65,8 @@
 - [ ] #idea Create a dashboard for tasks with progress
 
 # Other
-- [ ] Find SW for creating SVG
-- [ ] Create a dummy SVG
+- [x] #other Find SW for creating SVG ✅ 2024-07-13
+	- [x] Figma ✅ 2024-07-13
 
 # TODO list
 

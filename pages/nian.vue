@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, type Ref } from 'vue';
+import nineData from '~/assets/data/wordsSAOL.json';
+
 /**
  * A PRNG class that represents the Linear Congruential Generator (`LCG`).
  * The LCG generates sequences of random numbers with the help of a seed and the next() method
  * It follows the following formula:
  * X_{n+1} = (aX_n + c) % m
  *
- * @property {number} seed - The seed value for the LCG.
- * @property {number} a - The multiplier in the LCG formula.
- * @property {number} c - The increment in the LCG formula.
- * @property {number} m - The modulus in the LCG formula.
- * @method next() - Returns the next number in the generator
+ * @param seed - The seed value for the LCG.
+ * @param a - The multiplier in the LCG formula.
+ * @param c - The increment in the LCG formula.
+ * @param m - The modulus in the LCG formula.
  */
 class LCG {
   constructor(private seed: number = 1, private a: number = 16807, private c: number = 0, private m: number = Math.pow(2, 31) - 1) {
@@ -19,7 +20,7 @@ class LCG {
     this.c = c;
     this.m = m;
   }
-
+  /** Returns the next number in the generator */
   next(): number {
     this.seed = (this.a * this.seed + this.c) % this.m;
     return this.seed / this.m;
@@ -29,9 +30,9 @@ class LCG {
 /**
  * Shuffles an array using the Fisher-Yates algorithm.
  *
- * @param {array} array - The array to shuffle.
- * @param {number} seed - The array to shuffle.
- * @returns {array} The shuffled array.
+ * @param array - The array to shuffle.
+ * @param seed - The array to shuffle.
+ * @returns The shuffled array.
  */
 function shuffle(array: string[], seed: number = 0) {
   const lcg = new LCG(seed);  // Initialize with a seed
@@ -42,13 +43,12 @@ function shuffle(array: string[], seed: number = 0) {
   return array;
 }
 
-
 /**
  * Finds all indices of a value in an array.
  *
- * @param {array} array - The array to search.
- * @param {any} val - The value to find.
- * @returns {array} An array of indices at which the value is found.
+ * @param array - The array to search.
+ * @param val - The value to find.
+ * @returns An array of indices at which the value is found.
  */
 function indexOfAll(array: any[], val: any): number[] {
   let indices: number[] = [];
@@ -60,18 +60,77 @@ function indexOfAll(array: any[], val: any): number[] {
   return indices;
 }
 
+/**
+ * Get amount of passed years starting from 2024 and amount of passed days from this year
+ * 
+ * @param currentDate - The date which calculations are based on 
+ * @returns Years passed since 2024 and days passed from current year
+ */
+function yearsDaysPassed(currentDate: Date): number[] {
+  // Compute amount of years passed
+  const year = currentDate.getFullYear();
+  const yearsPassed = year - 2024;
 
-// The get word, seed and scramble part need to be handled on the server-side!
-const seed = 123;
-const word = "microsoft".toUpperCase();
-const puzzleLetters = shuffle(Array.from(word), seed);
-const btnStates: Ref<boolean[]> = ref(puzzleLetters.map(() => false))
-const userInput: Ref<{ char: string; highlighted: boolean }[]> = ref([]);
-let isGuessCorrect: Ref<boolean> = ref(false)
+  // Compute amount of days passed this year
+  const startOfYear = new Date(year, 5, 10);
+  const msTimeDiff = currentDate.getTime() - startOfYear.getTime();
+  const daysPassed = Math.floor(msTimeDiff / (1000 * 60 * 60 * 24));
 
-// Init dict letterFreq - used later to prevent inputs
+  return [yearsPassed, daysPassed];
+}
+
+/**
+ * Generates the puzzle letters
+ * 
+ * @param numSeed - An extra number to change up the seed 
+ * @param nNext - Amount of next() calls to do
+ * @returns Shuffled puzzle letters
+ */
+function generatePuzzle(numSeed: number, nNext: number): string[] {
+  const seed = 123 + numSeed;
+  const lcg = new LCG(seed);
+  const nWords = nineData.words.length;
+
+  let idx = 0;
+  for (let _ = 0; _ < nNext; _++) {
+    idx = Math.floor(lcg.next() * nWords);
+  }
+
+  return shuffle(Array.from(nineData.words[idx]), seed);
+}
+
+/**
+ * Finds anagrams in nineData based on the given letters
+ * 
+ * @param letters - The anagram letters
+ * @returns An array with the found anagram words
+ */
+function findAnagrams(letters: string[]): string[] {
+  // Create a copy so it does not affect the variable in the outer scope
+  const sortedLetters = [...letters].sort().join('');
+  return nineData.words.filter(word => sortedLetters === word.split('').sort().join(''));
+}
+
+///////////////
+// Init core //
+///////////////
+let userInput: Ref<{ char: string; highlighted: boolean }[]> = ref([]);
+let isGuessCorrect: Ref<boolean> = ref(false);
+
+// Get current dates
+const currentDate = new Date();
+const [yearsPassed, daysPassed] = yearsDaysPassed(currentDate);
+
+// Generate the word and init button states
+const puzzleLetters = generatePuzzle(yearsPassed, daysPassed);
+let btnStates: Ref<boolean[]> = ref(puzzleLetters.map(() => false));
+
+// Find anagrams incase there are more than one answer
+const words = findAnagrams(puzzleLetters);
+const nWords: Ref<number> = ref(words.length);
+
+// Init dict that prevents wrong inputs
 let letterFreq: { [key: string]: number } = {};
-
 for (const letter of puzzleLetters) {
   if (!letterFreq[letter]) {
     letterFreq[letter] = 1;
@@ -79,6 +138,10 @@ for (const letter of puzzleLetters) {
     letterFreq[letter]++;
   }
 }
+
+////////////////
+// Game logic //
+////////////////
 
 // Helper functions for the event handler handleKeydown -the logic is for keyboard event presses and displays through userInput variable
 function handleLetterDeletion(letterToDel: string = "", tileIdx: number = -1) {
@@ -111,9 +174,10 @@ function handleLetterInput(keyInput: string, tileIdx: number = -1) {
     highlightRepeatedLetters(keyInput);
   }
 
-  if (userInput.value.length === word.length) {
+  // Check for a win
+  if (userInput.value.length === puzzleLetters.length) {
     let guess = userInput.value.map(item => item.char).join('');
-    isGuessCorrect = guess === word;
+    isGuessCorrect = words.includes(guess);
   } else {
     isGuessCorrect = false;
   }
@@ -155,7 +219,7 @@ onUnmounted(() => {
 });
 
 
-// Controls if the tiles are grayed out or not
+/** Controls if the tiles are grayed out or not */
 function changeBtnState(letter: string, state: boolean, usedIdx: number | undefined = -1) {
   if (usedIdx === -1) {
     usedIdx = indexOfAll(puzzleLetters, letter).find(idx => btnStates.value[idx] === !state);
@@ -166,7 +230,7 @@ function changeBtnState(letter: string, state: boolean, usedIdx: number | undefi
   }
 }
 
-// Code that displays used words based on the buttons clicked and is synchronized with keyboard inputs
+/** Code that displays used words based on the buttons clicked and is synchronized with keyboard inputs */
 function displayUsedWords(letter: string, idx: number) {
   if (btnStates.value[idx]) {
     handleLetterDeletion(letter, idx)
@@ -189,6 +253,12 @@ function displayUsedWords(letter: string, idx: number) {
           :class="{ 'bg-black text-white': letterBoxIdx === 4, 'bg-gray-300': btnStates[letterBoxIdx], 'bg-gray-600': letterBoxIdx === 4 && btnStates[letterBoxIdx] }">
           {{ displayLetter }}
         </button>
+      </div>
+
+      <!-- Display x words -->
+      <div v-if="nWords > 1"
+        class="font-mono text-4xl text-red-700 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] absolute top-0 -right-0 transform translate-x-3/4 -translate-y-1/2">
+        &times;{{ nWords }}
       </div>
 
       <!-- Display winning text -->

@@ -6,14 +6,14 @@ const props = defineProps({
   to: String,
   src: {
     type: String,
-    default: 'svg/internet-artifacts.svg'
+    default: 'svg/nian.svg'
   }
 });
 
 </script>
 
 <template>
-  <div class="rounded-xl hover:shadow-lg menu-hover">
+  <div class="rounded-3xl hover:shadow-lg menu-hover">
     <NuxtLink :to>
       <img :src class=" object-cover" />
     </NuxtLink>
