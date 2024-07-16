@@ -278,7 +278,7 @@ function displayUsedWords(letter: string, idx: number) {
     <div class="inline-flex flex-wrap mt-3">
       <div v-for="(inputLetter, inputIdx) in userInput" :key="inputIdx"
         class="p-2 size-10 border-dashed border border-black rounded-lg flex justify-center items-center"
-        :class="{ 'bg-orange-300': inputLetter.highlighted, 'ml-1': inputIdx > 0, 'border-emerald-300': isGuessCorrect }">
+        :class="{ 'bg-orange-300': inputLetter.highlighted, 'ml-1': inputIdx > 0, 'border-emerald-300': isGuessCorrect, 'animate-shake-x': userInput.length === 9 && !isGuessCorrect }">
         {{ inputLetter.char }}
       </div>
     </div>

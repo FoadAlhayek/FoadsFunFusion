@@ -13,6 +13,17 @@ export default {
       fontFamily: {
         FairProsper: ["FairProsper", "sans-serif"],
       },
+      keyframes: {
+        "shake-x": {
+          "10%, 90%": { transform: "translateX(-2px)" },
+          "20%, 80%": { transform: "translateX(2px)" },
+          "30%, 50%, 70%": { transform: "translate(-4px)" },
+          "40%, 60%": { transform: "translateX(4px)" },
+        },
+      },
+      animation: {
+        "shake-x": "shake-x 0.7s",
+      },
     },
   },
   plugins: [],
