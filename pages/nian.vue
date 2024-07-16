@@ -267,9 +267,9 @@ function displayUsedWords(letter: string, idx: number) {
         &times;{{ nWords }}
       </div>
 
-      <!-- Display winning text -->
+      <!-- Display lätt/easy text -->
       <div v-if="isGuessCorrect"
-        class="font-FairProsper text-4xl text-orange-400 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] absolute bottom-0 -right-0 transform translate-x-3/4 translate-y-2/3 rotate-12">
+        class="font-FairProsper text-2xl text-orange-400 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] absolute bottom-0 -right-0 transform translate-x-3/4 translate-y-2/3 rotate-12 sm:text-4xl">
         //Lätt
       </div>
     </div>
@@ -277,7 +277,7 @@ function displayUsedWords(letter: string, idx: number) {
     <!-- The user input, is displayed iteratively until 9 boxes  -->
     <div class="inline-flex flex-wrap mt-3">
       <div v-for="(inputLetter, inputIdx) in userInput" :key="inputIdx"
-        class="p-2 size-10 border-dashed border border-black rounded-lg flex justify-center items-center"
+        class="size-7 mx-auto border-dashed border border-black rounded-lg flex justify-center items-center sm:size-10"
         :class="{ 'bg-orange-300': inputLetter.highlighted, 'ml-1': inputIdx > 0, 'border-emerald-300': isGuessCorrect, 'animate-shake-x': userInput.length === 9 && !isGuessCorrect }">
         {{ inputLetter.char }}
       </div>
