@@ -42,7 +42,7 @@
 - [x] #9an #in-progress Convert JSDoc to TSDoc ✅ 2024-07-13
 - [x] #9an #in-progress Create a menu button ✅ 2024-07-13
 - [x] #9an #in-progress Animate when answer is wrong (shaking) ✅ 2024-07-16
-- [ ] #9an #in-progress Animate when answer is correct (individual jump)
+- [x] #9an #in-progress Animate when answer is correct (individual jump) ✅ 2024-07-17
 - [x] #9an #in-progress Show if there are more than one answer (x2, x3, etc.) ✅ 2024-07-13
 - [ ] #9an #todo Save the correct answer under the input
 - [ ] #9an #todo If all words found, make it pop (fireworks)
@@ -58,6 +58,7 @@
 - [ ] #9an #todo Let friends try it out for a week
 - [ ] #9an #todo Implement dark mode
 - [ ] #9an #todo Change style and background so it feels it is in a news paper
+- [ ] #9an #in-progress Remove double tap zoom and font on phones
 
 
 # Ideas
