@@ -269,16 +269,17 @@ function displayUsedWords(letter: string, idx: number) {
 
       <!-- Display lätt/easy text -->
       <div v-if="isGuessCorrect"
-        class="font-FairProsper text-2xl text-orange-400 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] absolute bottom-0 -right-0 transform translate-x-3/4 translate-y-2/3 rotate-12 sm:text-4xl">
+        class="font-FairProsper text-2xl text-orange-400 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] absolute bottom-0 -right-0 transform translate-x-3/4 translate-y-2/3 rotate-12 sm:text-3xl md:text-4xl">
         //Lätt
       </div>
     </div>
 
     <!-- The user input, is displayed iteratively until 9 boxes  -->
-    <div class="inline-flex flex-wrap mt-3">
+    <div class="inline-flex flex-wrap mt-6">
       <div v-for="(inputLetter, inputIdx) in userInput" :key="inputIdx"
-        class="size-7 mx-auto border-dashed border border-black rounded-lg flex justify-center items-center sm:size-10"
-        :class="{ 'bg-orange-300': inputLetter.highlighted, 'ml-1': inputIdx > 0, 'border-emerald-300': isGuessCorrect, 'animate-shake-x': userInput.length === 9 && !isGuessCorrect }">
+        class="size-7 mx-auto border-dashed border border-black rounded-lg flex justify-center items-center sm:size-9 md:size-11"
+        :class="{ 'bg-orange-300': inputLetter.highlighted, 'ml-1': inputIdx > 0, 'border-emerald-300 animate-bounce-y': isGuessCorrect, 'animate-shake-x': userInput.length === 9 && !isGuessCorrect }"
+        :style="{ 'animation-delay': `${(inputIdx * 0.05 + 0.3) * isGuessCorrect}s` }">
         {{ inputLetter.char }}
       </div>
     </div>
