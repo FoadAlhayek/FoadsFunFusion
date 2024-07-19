@@ -249,7 +249,7 @@ function displayUsedWords(letter: string, idx: number) {
   </div>
 
   <!-- Wraps puzzle and input to be able to center them -->
-  <div class="mt-5 px-6 font-bold font-mono flex flex-col items-center touch-none">
+  <div class="mt-5 px-6 font-bold font-mono flex flex-col items-center">
     <div class="relative inline-block">
       <!-- Displays the 9 word puzzle -->
       <div class="size-60 text-4xl bg-white text-black grid grid-cols-3 gap-0 border-2 border-black rounded-md">
