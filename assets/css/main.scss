@@ -12,7 +12,7 @@
   }
 }
 
-// Globally disables double-tap-zoom
+// Globally disables double-tap-zoom on clickable elements
 * {
   touch-action: manipulation;
 }
