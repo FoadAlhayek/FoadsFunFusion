@@ -12,6 +12,10 @@
   }
 }
 
-* {
-  touch-action: manipulation !important;
+*,
+h1,
+h2,
+p,
+button {
+  touch-action: manipulation;
 }
