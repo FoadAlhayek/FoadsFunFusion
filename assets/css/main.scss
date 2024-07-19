@@ -11,3 +11,8 @@
     src: url("/assets/fonts/Fair Prosper.ttf") format("truetype");
   }
 }
+
+// Globally disables double-tap-zoom on clickable elements
+* {
+  touch-action: manipulation;
+}
