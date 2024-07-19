@@ -11,3 +11,7 @@
     src: url("/assets/fonts/Fair Prosper.ttf") format("truetype");
   }
 }
+
+* {
+  touch-action: manipulation;
+}
