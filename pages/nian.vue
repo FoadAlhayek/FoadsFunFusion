@@ -242,47 +242,45 @@ function displayUsedWords(letter: string, idx: number) {
 </script>
 
 <template>
-  <div class="touch-manipulation">
-    <!-- Title and subtitle -->
-    <div class="mt-3 font-mono flex flex-col items-center">
-      <h1 class="text-5xl tracking-widest">NIAN</h1>
-      <h2 class="text-base leading-none">Find the nine letter word</h2>
-    </div>
+  <!-- Title and subtitle -->
+  <div class="mt-3 font-mono flex flex-col items-center">
+    <h1 class="text-5xl tracking-widest">NIAN</h1>
+    <h2 class="text-base leading-none">Find the nine letter word</h2>
+  </div>
 
-    <!-- Wraps puzzle and input to be able to center them -->
-    <div class="mt-5 px-6 font-bold font-mono flex flex-col items-center touch-none">
-      <div class="relative inline-block">
-        <!-- Displays the 9 word puzzle -->
-        <div class="size-60 text-4xl bg-white text-black grid grid-cols-3 gap-0 border-2 border-black rounded-md">
-          <button @click="displayUsedWords(displayLetter, letterBoxIdx)"
-            v-for="(displayLetter, letterBoxIdx) in puzzleLetters" :key="letterBoxIdx"
-            class="border border-black flex justify-center items-center"
-            :class="{ 'bg-black text-white': letterBoxIdx === 4, 'bg-gray-300': btnStates[letterBoxIdx], 'bg-gray-600': letterBoxIdx === 4 && btnStates[letterBoxIdx] }">
-            {{ displayLetter }}
-          </button>
-        </div>
-
-        <!-- Display x words -->
-        <div v-if="nWords > 1"
-          class="font-mono text-4xl text-red-700 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] absolute top-0 -right-0 transform translate-x-3/4 -translate-y-1/2">
-          &times;{{ nWords }}
-        </div>
-
-        <!-- Display lätt/easy text -->
-        <div v-if="isGuessCorrect"
-          class="font-FairProsper text-2xl text-orange-400 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] absolute bottom-0 -right-0 transform translate-x-3/4 translate-y-2/3 rotate-12 sm:text-3xl md:text-4xl">
-          //Lätt
-        </div>
+  <!-- Wraps puzzle and input to be able to center them -->
+  <div class="mt-5 px-6 font-bold font-mono flex flex-col items-center touch-none">
+    <div class="relative inline-block">
+      <!-- Displays the 9 word puzzle -->
+      <div class="size-60 text-4xl bg-white text-black grid grid-cols-3 gap-0 border-2 border-black rounded-md">
+        <button @click="displayUsedWords(displayLetter, letterBoxIdx)"
+          v-for="(displayLetter, letterBoxIdx) in puzzleLetters" :key="letterBoxIdx"
+          class="border border-black flex justify-center items-center"
+          :class="{ 'bg-black text-white': letterBoxIdx === 4, 'bg-gray-300': btnStates[letterBoxIdx], 'bg-gray-600': letterBoxIdx === 4 && btnStates[letterBoxIdx] }">
+          {{ displayLetter }}
+        </button>
       </div>
 
-      <!-- The user input, is displayed iteratively until 9 boxes  -->
-      <div class="inline-flex flex-wrap mt-6">
-        <div v-for="(inputLetter, inputIdx) in userInput" :key="inputIdx"
-          class="size-7 mx-auto border-dashed border border-black rounded-lg flex justify-center items-center sm:size-9 md:size-11"
-          :class="{ 'bg-orange-300': inputLetter.highlighted, 'ml-1': inputIdx > 0, 'border-emerald-300 animate-bounce-y': isGuessCorrect, 'animate-shake-x': userInput.length === 9 && !isGuessCorrect }"
-          :style="{ 'animation-delay': `${(inputIdx * 0.05 + 0.3) * isGuessCorrect}s` }">
-          {{ inputLetter.char }}
-        </div>
+      <!-- Display x words -->
+      <div v-if="nWords > 1"
+        class="font-mono text-4xl text-red-700 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] absolute top-0 -right-0 transform translate-x-3/4 -translate-y-1/2">
+        &times;{{ nWords }}
+      </div>
+
+      <!-- Display lätt/easy text -->
+      <div v-if="isGuessCorrect"
+        class="font-FairProsper text-2xl text-orange-400 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] absolute bottom-0 -right-0 transform translate-x-3/4 translate-y-2/3 rotate-12 sm:text-3xl md:text-4xl">
+        //Lätt
+      </div>
+    </div>
+
+    <!-- The user input, is displayed iteratively until 9 boxes  -->
+    <div class="inline-flex flex-wrap mt-6">
+      <div v-for="(inputLetter, inputIdx) in userInput" :key="inputIdx"
+        class="size-7 mx-auto border-dashed border border-black rounded-lg flex justify-center items-center sm:size-9 md:size-11"
+        :class="{ 'bg-orange-300': inputLetter.highlighted, 'ml-1': inputIdx > 0, 'border-emerald-300 animate-bounce-y': isGuessCorrect, 'animate-shake-x': userInput.length === 9 && !isGuessCorrect }"
+        :style="{ 'animation-delay': `${(inputIdx * 0.05 + 0.3) * isGuessCorrect}s` }">
+        {{ inputLetter.char }}
       </div>
     </div>
   </div>
