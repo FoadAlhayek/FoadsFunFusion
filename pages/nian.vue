@@ -4,9 +4,18 @@ import nineData from '~/assets/data/wordsSAOL.json';
 
 // Body
 useHead({
+  title: 'NIAN',
   bodyAttrs: {
     class: 'bg-gradient-to-b from-amber-50 to-amber-100 min-h-screen'
-  }
+  },
+  link: [
+    {
+      hid: 'icon',
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '/icons/favicon-nian.ico',
+    },
+  ],
 });
 
 
@@ -253,18 +262,18 @@ function displayUsedWords(letter: string, idx: number) {
   <!-- Title and subtitle -->
   <div class="mt-3 font-mono flex flex-col items-center">
     <h1 class="text-5xl tracking-widest">NIAN</h1>
-    <h2 class="text-base leading-none">Find the nine letter word</h2>
+    <h2 class="text-base leading-none">Find the nine-letter word<span v-if="nWords > 1">s</span></h2>
   </div>
 
   <!-- Wraps puzzle and input to be able to center them -->
-  <div class="mt-5 px-6 font-bold font-mono flex flex-col items-center">
+  <div class="mt-5 px-3 font-bold font-mono flex flex-col items-center">
     <div class="relative inline-block">
       <!-- Displays the 9 word puzzle -->
-      <div class="size-60 text-4xl bg-white text-black grid grid-cols-3 gap-0 border-2 border-black rounded-md">
+      <div class="size-60 text-4xl bg-neutral-50 text-black grid grid-cols-3 gap-0 border-2 border-black rounded-md">
         <button @click="displayUsedWords(displayLetter, letterBoxIdx)"
           v-for="(displayLetter, letterBoxIdx) in puzzleLetters" :key="letterBoxIdx"
           class="border border-black flex justify-center items-center"
-          :class="{ 'bg-black text-white': letterBoxIdx === 4, 'bg-gray-300': btnStates[letterBoxIdx], 'bg-gray-600': letterBoxIdx === 4 && btnStates[letterBoxIdx] }">
+          :class="{ 'bg-black text-neutral-50': letterBoxIdx === 4, 'bg-gray-300': btnStates[letterBoxIdx], 'bg-gray-600': letterBoxIdx === 4 && btnStates[letterBoxIdx] }">
           {{ displayLetter }}
         </button>
       </div>
@@ -285,7 +294,7 @@ function displayUsedWords(letter: string, idx: number) {
     <!-- The user input, is displayed iteratively until 9 boxes  -->
     <div class="inline-flex flex-wrap mt-6">
       <div v-for="(inputLetter, inputIdx) in userInput" :key="inputIdx"
-        class="size-7 mx-auto bg-white border-dashed border border-black rounded-lg flex justify-center items-center sm:size-9 md:size-11"
+        class="size-8 mx-auto bg-neutral-50 border-dashed border border-black rounded-lg flex justify-center items-center sm:size-9 md:size-11"
         :class="{ 'bg-orange-300': inputLetter.highlighted, 'ml-1': inputIdx > 0, 'border-emerald-500 animate-bounce-y': isGuessCorrect, 'animate-shake-x': userInput.length === 9 && !isGuessCorrect }"
         :style="{ 'animation-delay': `${(inputIdx * 0.05 + 0.3) * isGuessCorrect}s` }">
         {{ inputLetter.char }}

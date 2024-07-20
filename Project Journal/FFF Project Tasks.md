@@ -48,18 +48,21 @@
 - [ ] #9an #todo If all words found, make it pop (fireworks)
 - [ ] #9an #todo Implement sounds for wrong and correct
 	- [ ] Maybe also add sounds for repeating letters and input sound
-- [ ] #9an #todo Add buttons to the side of Nian
+- [ ] #9an #in-progress Add buttons to the side of Nian
 	- [ ] Mute
 	- [ ] Reset
 	- [ ] Solution - after x10 guesses
 		- [ ] Rewrite from //Easy to //Hard if used
 - [x] #9an #in-progress Add a Title "Nian" and subtitle that briefly explaining the game ✅ 2024-07-15
 	- [x] Decorate it mono-type and simple, should have the feel of The NY Times ✅ 2024-07-15
-- [ ] #9an #todo Let friends try it out for a week
+- [ ] #9an #in-progress Let friends try it out for a week
 - [ ] #9an #todo Implement dark mode
-- [ ] #9an #in-progress Change style and background so it isn't plain white
+- [x] #9an #in-progress Fix a favicon for Nian page and tab title ✅ 2024-07-20
+- [x] #9an #in-progress If more than one word exists, then change subtitle ✅ 2024-07-20
+- [x] #9an #in-progress QoL update, remove pure white & fix mobile input size ✅ 2024-07-20
+- [x] #9an #in-progress Change style and background so it isn't plain white ✅ 2024-07-20
 - [x] #9an #in-progress Remove double tap zoom and font on phones ✅ 2024-07-20
-- [ ] #9an #in-progress Fix //Lätt font on mobile
+- [x] #9an #in-progress Fix //Lätt font on mobile ✅ 2024-07-20
 
 
 # Ideas
