@@ -57,8 +57,9 @@
 	- [x] Decorate it mono-type and simple, should have the feel of The NY Times ✅ 2024-07-15
 - [ ] #9an #todo Let friends try it out for a week
 - [ ] #9an #todo Implement dark mode
-- [ ] #9an #todo Change style and background so it feels it is in a news paper
-- [ ] #9an #in-progress Remove double tap zoom and font on phones
+- [ ] #9an #in-progress Change style and background so it isn't plain white
+- [x] #9an #in-progress Remove double tap zoom and font on phones ✅ 2024-07-20
+- [ ] #9an #in-progress Fix //Lätt font on mobile
 
 
 # Ideas

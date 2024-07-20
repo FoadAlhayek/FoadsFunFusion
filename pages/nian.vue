@@ -2,6 +2,14 @@
 import { ref, onMounted, onUnmounted, type Ref } from 'vue';
 import nineData from '~/assets/data/wordsSAOL.json';
 
+// Body
+useHead({
+  bodyAttrs: {
+    class: 'bg-gradient-to-b from-amber-50 to-amber-100 min-h-screen'
+  }
+});
+
+
 /**
  * A PRNG class that represents the Linear Congruential Generator (`LCG`).
  * The LCG generates sequences of random numbers with the help of a seed and the next() method
@@ -277,8 +285,8 @@ function displayUsedWords(letter: string, idx: number) {
     <!-- The user input, is displayed iteratively until 9 boxes  -->
     <div class="inline-flex flex-wrap mt-6">
       <div v-for="(inputLetter, inputIdx) in userInput" :key="inputIdx"
-        class="size-7 mx-auto border-dashed border border-black rounded-lg flex justify-center items-center sm:size-9 md:size-11"
-        :class="{ 'bg-orange-300': inputLetter.highlighted, 'ml-1': inputIdx > 0, 'border-emerald-300 animate-bounce-y': isGuessCorrect, 'animate-shake-x': userInput.length === 9 && !isGuessCorrect }"
+        class="size-7 mx-auto bg-white border-dashed border border-black rounded-lg flex justify-center items-center sm:size-9 md:size-11"
+        :class="{ 'bg-orange-300': inputLetter.highlighted, 'ml-1': inputIdx > 0, 'border-emerald-500 animate-bounce-y': isGuessCorrect, 'animate-shake-x': userInput.length === 9 && !isGuessCorrect }"
         :style="{ 'animation-delay': `${(inputIdx * 0.05 + 0.3) * isGuessCorrect}s` }">
         {{ inputLetter.char }}
       </div>
