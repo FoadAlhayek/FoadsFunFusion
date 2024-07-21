@@ -50,7 +50,7 @@
 	- [ ] Maybe also add sounds for repeating letters and input sound
 - [ ] #9an #in-progress Add buttons to the side of Nian
 	- [ ] Mute
-	- [ ] Reset
+	- [x] Reset ✅ 2024-07-21
 	- [ ] Solution - after x10 guesses
 		- [ ] Rewrite from //Easy to //Hard if used
 - [x] #9an #in-progress Add a Title "Nian" and subtitle that briefly explaining the game ✅ 2024-07-15
