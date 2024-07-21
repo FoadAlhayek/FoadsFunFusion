@@ -6,7 +6,7 @@ const props = defineProps({
   to: String,
   src: {
     type: String,
-    default: 'svg/nian.svg'
+    default: 'svg/menu/nian.svg'
   }
 });
 
