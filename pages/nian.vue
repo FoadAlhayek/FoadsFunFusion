@@ -2,7 +2,7 @@
 import { ref, onMounted, onUnmounted, type Ref } from 'vue';
 import nineData from '~/assets/data/wordsSAOL.json';
 
-// Body
+
 useHead({
   title: 'NIAN',
   bodyAttrs: {
@@ -128,6 +128,24 @@ function findAnagrams(letters: string[]): string[] {
   return nineData.words.filter(word => sortedLetters === word.split('').sort().join(''));
 }
 
+/**
+ * Count the letter frequency of a word
+ * 
+ * @param letters - The letters to count
+ * @returns A dict with keys as letters and values as frequencies
+ */
+function letterFrequency(letters: string[]): { [key: string]: number } {
+  let letterFreq: { [key: string]: number } = {};
+  for (const letter of puzzleLetters) {
+    if (!letterFreq[letter]) {
+      letterFreq[letter] = 1;
+    } else {
+      letterFreq[letter]++;
+    }
+  }
+  return letterFreq;
+}
+
 ///////////////
 // Init core //
 ///////////////
@@ -147,14 +165,7 @@ const words = findAnagrams(puzzleLetters);
 const nWords: Ref<number> = ref(words.length);
 
 // Init dict that prevents wrong inputs
-let letterFreq: { [key: string]: number } = {};
-for (const letter of puzzleLetters) {
-  if (!letterFreq[letter]) {
-    letterFreq[letter] = 1;
-  } else {
-    letterFreq[letter]++;
-  }
-}
+let letterFreq = letterFrequency(puzzleLetters);
 
 ////////////////
 // Game logic //
@@ -256,6 +267,14 @@ function displayUsedWords(letter: string, idx: number) {
   }
 }
 
+/** Resets the game state */
+function resetGameState() {
+  userInput.value = [];
+  isGuessCorrect = false;
+  btnStates.value = puzzleLetters.map(() => false);
+  letterFreq = letterFrequency(puzzleLetters);
+}
+
 </script>
 
 <template>
@@ -284,6 +303,14 @@ function displayUsedWords(letter: string, idx: number) {
         &times;{{ nWords }}
       </div>
 
+      <!-- Menu buttons -->
+      <div class="absolute top-6 -right-12 flex flex-col space-y-4">
+        <button @click="resetGameState()">
+          <img src="~/assets/icons/small_broom_colored.svg" alt="Clear NIAN"
+            class="h-10 w-8 transition-transform duration-100 ease-out hover:scale-[1.15]" />
+        </button>
+      </div>
+
       <!-- Display lätt/easy text -->
       <div v-if="isGuessCorrect"
         class="font-FairProsper text-2xl text-orange-400 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] absolute bottom-0 -right-0 transform translate-x-3/4 translate-y-2/3 rotate-12 sm:text-3xl md:text-4xl">
@@ -292,10 +319,10 @@ function displayUsedWords(letter: string, idx: number) {
     </div>
 
     <!-- The user input, is displayed iteratively until 9 boxes  -->
-    <div class="inline-flex flex-wrap mt-6">
+    <div class="inline-flex flex-wrap mt-6 space-x-1">
       <div v-for="(inputLetter, inputIdx) in userInput" :key="inputIdx"
         class="size-8 mx-auto bg-neutral-50 border-dashed border border-black rounded-lg flex justify-center items-center sm:size-9 md:size-11"
-        :class="{ 'bg-orange-300': inputLetter.highlighted, 'ml-1': inputIdx > 0, 'border-emerald-500 animate-bounce-y': isGuessCorrect, 'animate-shake-x': userInput.length === 9 && !isGuessCorrect }"
+        :class="{ 'bg-orange-300': inputLetter.highlighted, 'border-emerald-500 animate-bounce-y': isGuessCorrect, 'animate-shake-x': userInput.length === 9 && !isGuessCorrect }"
         :style="{ 'animation-delay': `${(inputIdx * 0.05 + 0.3) * isGuessCorrect}s` }">
         {{ inputLetter.char }}
       </div>
