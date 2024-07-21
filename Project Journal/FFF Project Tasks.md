@@ -48,12 +48,12 @@
 - [ ] #9an #todo If all words found, make it pop (fireworks)
 - [ ] #9an #todo Implement sounds for wrong and correct
 	- [ ] Maybe also add sounds for repeating letters and input sound
-- [ ] #9an #in-progress Add buttons to the side of Nian
-	- [ ] Mute
+	- [ ] Add a mute button
+- [x] #9an #in-progress Add buttons to the side of Nian ✅ 2024-07-21
 	- [x] Reset ✅ 2024-07-21
 		- [x] Add brushing animation ✅ 2024-07-21
-	- [ ] Solution - after x10 guesses
-		- [ ] Rewrite from //Easy to //Hard if used
+	- [x] Helper ✅ 2024-07-21
+		- [x] Rewrite from //Easy to //Hard if used ✅ 2024-07-21
 - [x] #9an #in-progress Add a Title "Nian" and subtitle that briefly explaining the game ✅ 2024-07-15
 	- [x] Decorate it mono-type and simple, should have the feel of The NY Times ✅ 2024-07-15
 - [ ] #9an #in-progress Let friends try it out for a week

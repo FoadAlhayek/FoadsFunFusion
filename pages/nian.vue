@@ -152,6 +152,7 @@ function letterFrequency(letters: string[]): { [key: string]: number } {
 ///////////////
 let userInput: Ref<{ char: string; highlighted: boolean }[]> = ref([]);
 let isGuessCorrect: Ref<boolean> = ref(false);
+let usedHelp: Ref<boolean> = ref(false);
 
 // Get current dates starting from 04:00
 const currentDate = new Date();
@@ -175,7 +176,7 @@ let letterFreq = letterFrequency(puzzleLetters);
 // Helper functions for the event handler handleKeydown -the logic is for keyboard event presses and displays through userInput variable
 function handleLetterDeletion(letterToDel: string = "", tileIdx: number = -1) {
   let removedLetter: string = "";
-  isGuessCorrect = false;
+  isGuessCorrect.value = false;
 
   // Mouse click logic - len 1 for safety
   if (letterToDel.length === 1) {
@@ -206,9 +207,9 @@ function handleLetterInput(keyInput: string, tileIdx: number = -1) {
   // Check for a win
   if (userInput.value.length === puzzleLetters.length) {
     let guess = userInput.value.map(item => item.char).join('');
-    isGuessCorrect = words.includes(guess);
+    isGuessCorrect.value = words.includes(guess);
   } else {
-    isGuessCorrect = false;
+    isGuessCorrect.value = false;
   }
 }
 
@@ -268,12 +269,42 @@ function displayUsedWords(letter: string, idx: number) {
   }
 }
 
+//////////////////
+// Help buttons //
+//////////////////
+
 /** Resets the game state */
 function resetGameState() {
   userInput.value = [];
-  isGuessCorrect = false;
+  isGuessCorrect.value = false;
   btnStates.value = puzzleLetters.map(() => false);
   letterFreq = letterFrequency(puzzleLetters);
+}
+
+/** Marks the first letter of the word */
+function markFirstLetter() {
+  if (isGuessCorrect.value) {
+    return;
+  }
+
+  // Change winning test to highlight help was used
+  usedHelp.value = true;
+
+  const firstInput = userInput.value[0];
+  const firstLetter = words[0][0];
+
+  // If no input, add the first letter
+  if (!firstInput) {
+    handleLetterInput(firstLetter);
+  } // If first input is correct, highlight it
+  else if (firstInput.char === firstLetter) {
+    firstInput.highlighted = true;
+    setTimeout(() => { firstInput.highlighted = false; }, 1000);
+  } // If first input is incorrect, reset and add the first letter
+  else {
+    resetGameState()
+    handleLetterInput(firstLetter);
+  }
 }
 
 </script>
@@ -304,17 +335,21 @@ function resetGameState() {
         &times;{{ nWords }}
       </div>
 
-      <!-- Menu buttons -->
+      <!-- Help buttons -->
       <div class="absolute top-6 -right-12 flex flex-col space-y-4">
         <button @click="resetGameState()">
           <IconsCleaningBroomAnim class="h-12" />
+        </button>
+        <button @click="markFirstLetter()">
+          <IconsMagnifyingGlassCounter
+            class="h-12 transition-transform duration-100 ease-out hover:scale-110 hover:-rotate-12" />
         </button>
       </div>
 
       <!-- Display lätt/easy text -->
       <div v-if="isGuessCorrect"
         class="font-FairProsper text-2xl text-orange-400 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] absolute bottom-0 -right-0 transform translate-x-3/4 translate-y-2/3 rotate-12 sm:text-3xl md:text-4xl">
-        //Lätt
+        <p>{{ usedHelp ? '//Svår' : '//Lätt' }}</p>
       </div>
     </div>
 

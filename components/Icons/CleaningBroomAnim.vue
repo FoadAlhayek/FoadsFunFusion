@@ -32,7 +32,7 @@
   }
 
   &:hover {
-    transform: scale(1.15) rotate(12deg);
+    transform: scale(1.10) rotate(12deg);
 
     #broom_brush_movement_lines {
       stroke-opacity: 0.4;
