@@ -1,2 +1,2 @@
-- [ ] SVG Compressor:
-	- [ ] https://jakearchibald.github.io/svgomg/
+- SVG Compressor:
+- https://jakearchibald.github.io/svgomg/
