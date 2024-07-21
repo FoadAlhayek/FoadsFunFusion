@@ -81,16 +81,17 @@ function indexOfAll(array: any[], val: any): number[] {
  * Get amount of passed years starting from 2024 and amount of passed days from this year
  * 
  * @param currentDate - The date which calculations are based on 
+ * @param delay - Time in ms to change when the day starts, where 0 keeps it at 00:00, pos increases (e.g. 01:00) and neg decreases (e.g. 11:00)
  * @returns Years passed since 2024 and days passed from current year
  */
-function yearsDaysPassed(currentDate: Date): number[] {
+function yearsDaysPassed(currentDate: Date, delay: number): number[] {
   // Compute amount of years passed
   const year = currentDate.getFullYear();
   const yearsPassed = year - 2024;
 
   // Compute amount of days passed this year
   const startOfYear = new Date(year, 5, 10);
-  const msTimeDiff = currentDate.getTime() - startOfYear.getTime();
+  const msTimeDiff = currentDate.getTime() - startOfYear.getTime() - delay;
   const daysPassed = Math.floor(msTimeDiff / (1000 * 60 * 60 * 24));
 
   return [yearsPassed, daysPassed];
@@ -152,9 +153,9 @@ function letterFrequency(letters: string[]): { [key: string]: number } {
 let userInput: Ref<{ char: string; highlighted: boolean }[]> = ref([]);
 let isGuessCorrect: Ref<boolean> = ref(false);
 
-// Get current dates
+// Get current dates starting from 04:00
 const currentDate = new Date();
-const [yearsPassed, daysPassed] = yearsDaysPassed(currentDate);
+const [yearsPassed, daysPassed] = yearsDaysPassed(currentDate, 1000 * 60 * 60 * 4);
 
 // Generate the word and init button states
 const puzzleLetters = generatePuzzle(yearsPassed, daysPassed);

@@ -63,6 +63,7 @@
 - [x] #9an #in-progress Change style and background so it isn't plain white ✅ 2024-07-20
 - [x] #9an #in-progress Remove double tap zoom and font on phones ✅ 2024-07-20
 - [x] #9an #in-progress Fix //Lätt font on mobile ✅ 2024-07-20
+- [x] #9an #in-progress Word changes each day at 04:00 instead of 00:00 ✅ 2024-07-21
 
 
 # Ideas
