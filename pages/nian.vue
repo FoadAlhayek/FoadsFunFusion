@@ -307,8 +307,7 @@ function resetGameState() {
       <!-- Menu buttons -->
       <div class="absolute top-6 -right-12 flex flex-col space-y-4">
         <button @click="resetGameState()">
-          <img src="~/assets/icons/small_broom_colored.svg" alt="Clear NIAN"
-            class="h-10 w-8 transition-transform duration-100 ease-out hover:scale-[1.15]" />
+          <IconsCleaningBroomAnim class="h-12" />
         </button>
       </div>
 
