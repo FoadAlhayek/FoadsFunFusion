@@ -180,7 +180,7 @@ function handleLetterDeletion(letterToDel: string = "", tileIdx: number = -1) {
 
   // Mouse click logic - len 1 for safety
   if (letterToDel.length === 1) {
-    const delIdx = userInput.value.findIndex(item => item.char === letterToDel);
+    const delIdx = userInput.value.findLastIndex(item => item.char === letterToDel);
     removedLetter = userInput.value.splice(delIdx, 1)[0].char;
   } // Backspace logic - Removes the latest letter if the list is not empty 
   else if (userInput.value.length > 0) {

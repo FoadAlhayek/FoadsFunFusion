@@ -65,6 +65,7 @@
 - [x] #9an #in-progress Remove double tap zoom and font on phones ✅ 2024-07-20
 - [x] #9an #in-progress Fix //Lätt font on mobile ✅ 2024-07-20
 - [x] #9an #in-progress Word changes each day at 04:00 instead of 00:00 ✅ 2024-07-21
+- [x] #9an #feedback #in-progress When deleting, remove last occurring letter instead of first (banana: second N gets removed not first) ✅ 2024-07-29
 
 
 # Ideas
