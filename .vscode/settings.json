@@ -19,5 +19,23 @@
   "eslint.validate": ["javascript", "vue"],
   "eslint.options": {
     "configFile": ".eslintrc.js"
-  }
+  },
+  "files.exclude": {
+    "**/.nuxt": true,
+    "**/.output": true,
+    "**/node_modules": true,
+    "**/dist": true
+  },
+  "search.exclude": {
+    "**/.nuxt": true,
+    "**/.output": true,
+    "**/node_modules": true,
+    "**/dist": true
+  },
+  "typescript.tsserver.exclude": [
+    "**/.nuxt",
+    "**/.output",
+    "**/node_modules",
+    "**/dist"
+  ]
 }
