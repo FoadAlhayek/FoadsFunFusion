@@ -1,5 +1,8 @@
 {
-  "subtitle": "Find the nine-letter word",
-  "easy": "Lätt",
-  "hard": "Svår"
+  "nian": {
+    "subtitle": "Hitta ordet på nio bokstäver",
+    "subtitlePlural": "Hitta orden på nio bokstäver",
+    "easy": "Lätt",
+    "hard": "Svår"
+  }
 }

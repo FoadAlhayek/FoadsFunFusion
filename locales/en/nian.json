@@ -1,5 +1,8 @@
 {
-  "subtitle": "Find the nine-letter word",
-  "easy": "Easy",
-  "hard": "Hard"
+  "nian": {
+    "subtitle": "Find the nine-letter word",
+    "subtitlePlural": "Find the nine-letter words",
+    "easy": "Easy",
+    "hard": "Hard"
+  }
 }

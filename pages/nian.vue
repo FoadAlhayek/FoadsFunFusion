@@ -313,7 +313,7 @@ function markFirstLetter() {
   <!-- Title and subtitle -->
   <div class="mt-3 font-mono flex flex-col items-center">
     <h1 class="text-5xl tracking-widest">NIAN</h1>
-    <h2 class="text-base leading-none">Find the nine-letter word<span v-if="nWords > 1">s</span></h2>
+    <h2 class="text-base leading-none">{{ nWords > 1 ? $t("nian.subtitlePlural") : $t("nian.subtitle") }}</h2>
   </div>
 
   <!-- Wraps puzzle and input to be able to center them -->
@@ -349,7 +349,7 @@ function markFirstLetter() {
       <!-- Display lätt/easy text -->
       <div v-if="isGuessCorrect"
         class="font-FairProsper text-2xl text-orange-400 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] absolute bottom-0 -right-0 transform translate-x-3/4 translate-y-2/3 rotate-12 sm:text-3xl md:text-4xl">
-        <p>{{ usedHelp ? '//Svår' : '//Lätt' }}</p>
+        <p>{{ usedHelp ? $t("nian.hard") : $t('nian.easy') }}</p>
       </div>
     </div>
 
