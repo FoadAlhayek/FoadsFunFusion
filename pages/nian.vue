@@ -341,7 +341,7 @@ function markFirstLetter() {
           <IconsCleaningBroomAnim class="h-12" />
         </button>
         <button @click="markFirstLetter()">
-          <IconsMagnifyingGlassCounter
+          <IconsMagnifyingGlass
             class="h-12 transition-transform duration-100 ease-out hover:scale-110 hover:-rotate-12" />
         </button>
       </div>
