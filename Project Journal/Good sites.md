@@ -1,2 +1,5 @@
 - SVG Compressor:
-- https://jakearchibald.github.io/svgomg/
+	- https://jakearchibald.github.io/svgomg/
+- CSS ideas:
+	- [Dribble](https://dribbble.com/)
+	- 

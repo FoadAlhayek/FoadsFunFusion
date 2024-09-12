@@ -37,7 +37,11 @@
 - [x] #9an #in-progress Generate a new word every new real-life local day ✅ 2024-07-13
 - [x] #9an #in-progress Connect it to a ~~lexicon~~ JSON file ✅ 2024-07-13
 - [x] #9an #in-progress Make a Swedish version of the game ✅ 2024-07-13
-- [ ] #9an #todo Make an English version of the game
+- [ ] #9an #in-progress Make an English version of the game
+	- [ ] Add a temporary language toggle
+	- [ ] Add English word-data
+	- [ ] Make the toggle switch between Swe and Eng
+	- [ ] Make the toggle a flag on a pole
 - [ ] #9an #todo Learn to implement the logic in backend (not relevant atm)
 - [x] #9an #in-progress Convert JSDoc to TSDoc ✅ 2024-07-13
 - [x] #9an #in-progress Create a menu button ✅ 2024-07-13
@@ -66,7 +70,7 @@
 - [x] #9an #in-progress Fix //Lätt font on mobile ✅ 2024-07-20
 - [x] #9an #in-progress Word changes each day at 04:00 instead of 00:00 ✅ 2024-07-21
 - [x] #9an #feedback #in-progress When deleting, remove last occurring letter instead of first (banana: second N gets removed not first) ✅ 2024-07-29
-- [ ] #9an #in-progress Implement word explanation once it is solved 
+- [ ] #9an #todo Implement word explanation once it is solved 
 
 
 # Ideas
