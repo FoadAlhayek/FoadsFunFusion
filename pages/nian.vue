@@ -90,9 +90,9 @@ function yearsDaysPassed(currentDate: Date, delay: number): number[] {
   const yearsPassed = year - 2024;
 
   // Compute amount of days passed this year
-  const startOfYear = new Date(year, 5, 10);
+  const startOfYear = new Date(year, 0, 1);
   const msTimeDiff = currentDate.getTime() - startOfYear.getTime() - delay;
-  const daysPassed = Math.floor(msTimeDiff / (1000 * 60 * 60 * 24));
+  const daysPassed = Math.floor(msTimeDiff / (86400000)); // 1000 * 60 * 60 * 24 = 86400000
 
   return [yearsPassed, daysPassed];
 }
@@ -154,9 +154,9 @@ let userInput: Ref<{ char: string; highlighted: boolean }[]> = ref([]);
 let isGuessCorrect: Ref<boolean> = ref(false);
 let usedHelp: Ref<boolean> = ref(false);
 
-// Get current dates starting from 04:00
+// Get current dates starting from 04:00 (new day is delayed with 4 hours)
 const currentDate = new Date();
-const [yearsPassed, daysPassed] = yearsDaysPassed(currentDate, 1000 * 60 * 60 * 4);
+const [yearsPassed, daysPassed] = yearsDaysPassed(currentDate, 14400000); // 1000 * 60 * 60 * 4 = 14400000
 
 // Generate the word and init button states
 const puzzleLetters = generatePuzzle(yearsPassed, daysPassed);
